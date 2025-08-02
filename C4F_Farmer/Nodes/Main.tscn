@@ -70,8 +70,9 @@ transform = Transform3D(1, 0, 0, 0, 0.947546, 0.319621, 0, -0.319621, 0.947546, 
 [node name="Movement" type="Node" parent="Level/Player"]
 script = ExtResource("2_u4xhh")
 
-[node name="RTSController" type="Node" parent="Level/Player"]
+[node name="RTSController" type="Node" parent="Level/Player" node_paths=PackedStringArray("camera")]
 script = ExtResource("3_l0yox")
+camera = NodePath("../Camera3D")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
 transform = Transform3D(0.796097, 0, -0.605169, 0.54254, 0.443024, 0.713709, 0.268104, -0.89651, 0.35269, 0, 0, 0)
