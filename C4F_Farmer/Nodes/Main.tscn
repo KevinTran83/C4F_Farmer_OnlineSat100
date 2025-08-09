@@ -1,8 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cy6kio86o3dtn"]
+[gd_scene load_steps=15 format=3 uid="uid://cy6kio86o3dtn"]
 
 [ext_resource type="Material" uid="uid://b3qhp65r7uy5m" path="res://C4F_Farmer/Materials/Green.tres" id="1_abe06"]
 [ext_resource type="Script" path="res://C4F_Farmer/Scripts/Movement.gd" id="2_u4xhh"]
 [ext_resource type="Script" path="res://C4F_Farmer/Scripts/RTSController.gd" id="3_l0yox"]
+[ext_resource type="Script" path="res://C4F_Farmer/Scripts/Inventory.gd" id="4_k6ca7"]
+[ext_resource type="Resource" uid="uid://cnwk2r0cts5gd" path="res://C4F_Farmer/Items/Potato.tres" id="5_b5fa0"]
+[ext_resource type="Script" path="res://C4F_Farmer/Scripts/Item.gd" id="6_bsopf"]
+[ext_resource type="Script" path="res://C4F_Farmer/Scripts/Farm.gd" id="6_jkqwl"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rxdnr"]
 size = Vector3(10, 1, 10)
@@ -73,6 +77,16 @@ script = ExtResource("2_u4xhh")
 [node name="RTSController" type="Node" parent="Level/Player" node_paths=PackedStringArray("camera")]
 script = ExtResource("3_l0yox")
 camera = NodePath("../Camera3D")
+
+[node name="Inventory" type="Node" parent="Level/Player"]
+script = ExtResource("4_k6ca7")
+inventory = {
+ExtResource("5_b5fa0"): 3
+}
+keys = Array[ExtResource("6_bsopf")]([ExtResource("5_b5fa0")])
+
+[node name="Farm" type="Node" parent="Level/Player"]
+script = ExtResource("6_jkqwl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
 transform = Transform3D(0.796097, 0, -0.605169, 0.54254, 0.443024, 0.713709, 0.268104, -0.89651, 0.35269, 0, 0, 0)

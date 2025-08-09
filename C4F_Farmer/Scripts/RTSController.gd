@@ -2,6 +2,7 @@ extends Node
 
 var agent : NavigationAgent3D
 @onready var movement : Movement = get_parent().get_node("Movement")
+@onready var farm     : Farm     = get_parent().get_node("Farm")
 @export  var camera   : Camera3D
 @onready var player   : CharacterBody3D = get_parent()
 
@@ -16,12 +17,13 @@ func _process(_dt : float) -> void:
             movement.Move(dir)
     
 func _input(event : InputEvent) -> void:
-    if (event is InputEventMouseButton
-    and event.get_button_index() == MOUSE_BUTTON_RIGHT
-       ):
-        var query : Dictionary = mouseRaycast()
-        if (!query.is_empty()):
-            agent.set_target_position(query.position)
+    if (event is InputEventMouseButton):
+        if(event.get_button_index() == MOUSE_BUTTON_RIGHT):
+            var query : Dictionary = mouseRaycast()
+            if (!query.is_empty()):
+                agent.set_target_position(query.position)
+        if(event.get_button_index() == MOUSE_BUTTON_LEFT):
+                farm.Plant()
 
 func mouseRaycast() -> Dictionary:
     if !camera : return {}
