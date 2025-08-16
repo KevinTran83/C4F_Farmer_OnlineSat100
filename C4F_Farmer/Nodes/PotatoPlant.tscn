@@ -1,5 +1,12 @@
-[gd_scene format=3 uid="uid://giniphuhuaml"]
+[gd_scene load_steps=3 format=3 uid="uid://giniphuhuaml"]
+
+[ext_resource type="Material" uid="uid://bdd8bmw8uo0yp" path="res://C4F_Farmer/Materials/Brown.tres" id="1_tix72"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_60pfo"]
+height = 0.5
 
 [node name="PotatoPlant" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_tix72")
+mesh = SubResource("SphereMesh_60pfo")
