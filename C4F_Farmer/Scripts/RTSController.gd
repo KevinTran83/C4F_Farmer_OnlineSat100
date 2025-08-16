@@ -23,7 +23,9 @@ func _input(event : InputEvent) -> void:
             if (!query.is_empty()):
                 agent.set_target_position(query.position)
         if(event.get_button_index() == MOUSE_BUTTON_LEFT):
-                farm.Plant()
+            var query : Dictionary = mouseRaycast()
+            if (!query.is_empty()):
+                farm.Plant(query.position)
 
 func mouseRaycast() -> Dictionary:
     if !camera : return {}

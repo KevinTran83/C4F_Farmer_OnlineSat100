@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://cy6kio86o3dtn"]
+[gd_scene load_steps=17 format=3 uid="uid://cy6kio86o3dtn"]
 
 [ext_resource type="Material" uid="uid://b3qhp65r7uy5m" path="res://C4F_Farmer/Materials/Green.tres" id="1_abe06"]
+[ext_resource type="Script" path="res://C4F_Farmer/Scripts/ItemRegistry.gd" id="1_y7876"]
 [ext_resource type="Script" path="res://C4F_Farmer/Scripts/Movement.gd" id="2_u4xhh"]
 [ext_resource type="Script" path="res://C4F_Farmer/Scripts/RTSController.gd" id="3_l0yox"]
+[ext_resource type="PackedScene" uid="uid://giniphuhuaml" path="res://C4F_Farmer/Nodes/PotatoPlant.tscn" id="3_udrmp"]
 [ext_resource type="Script" path="res://C4F_Farmer/Scripts/Inventory.gd" id="4_k6ca7"]
 [ext_resource type="Resource" uid="uid://cnwk2r0cts5gd" path="res://C4F_Farmer/Items/Potato.tres" id="5_b5fa0"]
 [ext_resource type="Script" path="res://C4F_Farmer/Scripts/Item.gd" id="6_bsopf"]
@@ -37,6 +39,12 @@ agent_radius = 0.02
 agent_max_climb = 0.02
 
 [node name="Main" type="Node"]
+
+[node name="ItemRegistry" type="Node" parent="."]
+script = ExtResource("1_y7876")
+registry = {
+ExtResource("5_b5fa0"): ExtResource("3_udrmp")
+}
 
 [node name="Level" type="Node3D" parent="."]
 
