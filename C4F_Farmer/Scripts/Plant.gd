@@ -1,3 +1,4 @@
+class_name Plant
 extends Node3D
 
 @export var seed : PackedScene

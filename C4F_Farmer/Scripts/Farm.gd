@@ -10,3 +10,7 @@ func Plant(spawnPos : Vector3) -> void:
     var newPlant : Node3D = plant.instantiate()
     get_parent().get_parent().add_child(newPlant)
     newPlant.set_global_position(spawnPos)
+
+func Harvest(targetPlant : Plant) -> void:
+    targetPlant.Drop()
+    targetPlant.queue_free()

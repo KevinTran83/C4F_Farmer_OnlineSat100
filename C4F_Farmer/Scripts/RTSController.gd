@@ -17,7 +17,7 @@ func _process(_dt : float) -> void:
             movement.Move(dir)
     
 func _input(event : InputEvent) -> void:
-    if (event is InputEventMouseButton):
+    if (event is InputEventMouseButton and event.is_pressed()):
         if(event.get_button_index() == MOUSE_BUTTON_RIGHT):
             var query : Dictionary = mouseRaycast()
             if (!query.is_empty()):
@@ -25,7 +25,9 @@ func _input(event : InputEvent) -> void:
         if(event.get_button_index() == MOUSE_BUTTON_LEFT):
             var query : Dictionary = mouseRaycast()
             if (!query.is_empty()):
-                farm.Plant(query.position)
+                var plant : Node3D = query.collider.get_parent()
+                if plant.is_in_group("Plant") : farm.Harvest(plant)
+                else     : farm.Plant(query.position)
 
 func mouseRaycast() -> Dictionary:
     if !camera : return {}

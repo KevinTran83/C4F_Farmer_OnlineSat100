@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://giniphuhuaml"]
+[gd_scene load_steps=6 format=3 uid="uid://giniphuhuaml"]
 
 [ext_resource type="Material" uid="uid://bdd8bmw8uo0yp" path="res://C4F_Farmer/Materials/Brown.tres" id="1_tix72"]
 [ext_resource type="Script" path="res://C4F_Farmer/Scripts/Plant.gd" id="1_u5o3r"]
+[ext_resource type="PackedScene" uid="uid://r4kqviyjnc2k" path="res://C4F_Farmer/Nodes/PotatoSeed.tscn" id="2_b3afh"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_60pfo"]
 radius = 0.05
@@ -10,14 +11,15 @@ height = 0.05
 [sub_resource type="SphereShape3D" id="SphereShape3D_52n5l"]
 radius = 0.05
 
-[node name="PotatoPlant" type="Node3D"]
+[node name="PotatoPlant" type="Node3D" groups=["Plant"]]
 script = ExtResource("1_u5o3r")
+seed = ExtResource("2_b3afh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = ExtResource("1_tix72")
 mesh = SubResource("SphereMesh_60pfo")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_52n5l")
