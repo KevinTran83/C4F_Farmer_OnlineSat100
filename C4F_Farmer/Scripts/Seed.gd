@@ -3,4 +3,6 @@ extends Node
 
 @export var item : Item
 
-func GetItem() -> Item : return item
+func GetItem() -> Item:
+    queue_free()
+    return item

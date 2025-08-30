@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://be5h4wmjnvqvy"]
+
+[ext_resource type="Texture2D" uid="uid://dukf56a2ut00r" path="res://C4F_Farmer/Sprites/carrot-100x100.png" id="1_0pywc"]
+[ext_resource type="Script" path="res://C4F_Farmer/Scripts/Seed.gd" id="1_bdnk8"]
+[ext_resource type="Resource" uid="uid://btrhiyum38m4t" path="res://C4F_Farmer/Items/Carrot.tres" id="2_aynuh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3tnj6"]
+radius = 0.2
+
+[node name="CarrotSeed" type="Node3D" groups=["Seed"]]
+script = ExtResource("1_bdnk8")
+item = ExtResource("2_aynuh")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+billboard = 1
+texture = ExtResource("1_0pywc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("SphereShape3D_3tnj6")

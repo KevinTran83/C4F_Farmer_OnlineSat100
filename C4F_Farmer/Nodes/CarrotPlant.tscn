@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://fj2qmrrx5dtq"]
+
+[ext_resource type="Script" path="res://C4F_Farmer/Scripts/Plant.gd" id="1_7q0vp"]
+[ext_resource type="Material" uid="uid://bdd8bmw8uo0yp" path="res://C4F_Farmer/Materials/Brown.tres" id="1_uj6tm"]
+[ext_resource type="PackedScene" uid="uid://be5h4wmjnvqvy" path="res://C4F_Farmer/Nodes/CarrotSeed.tscn" id="2_2vsrf"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1rqgb"]
+radius = 0.05
+height = 0.05
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_km4v7"]
+radius = 0.1
+
+[node name="CarrotPlant" type="Node3D" groups=["Plant"]]
+script = ExtResource("1_7q0vp")
+seed = ExtResource("2_2vsrf")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_uj6tm")
+mesh = SubResource("SphereMesh_1rqgb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("SphereShape3D_km4v7")

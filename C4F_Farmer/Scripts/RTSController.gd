@@ -5,6 +5,7 @@ var agent : NavigationAgent3D
 @onready var farm     : Farm     = get_parent().get_node("Farm")
 @export  var camera   : Camera3D
 @onready var player   : CharacterBody3D = get_parent()
+@onready var inventory : Inventory = get_parent().get_node("Inventory")
 
 func _ready() -> void:
     agent = NavigationAgent3D.new()
@@ -26,8 +27,9 @@ func _input(event : InputEvent) -> void:
             var query : Dictionary = mouseRaycast()
             if (!query.is_empty()):
                 var plant : Node3D = query.collider.get_parent()
-                if plant.is_in_group("Plant") : farm.Harvest(plant)
-                else     : farm.Plant(query.position)
+                if   plant.is_in_group("Plant") : farm.Harvest(plant)
+                elif plant.is_in_group("Seed")  : inventory.AddItem(plant.GetItem())
+                else                            : farm.Plant(query.position)
 
 func mouseRaycast() -> Dictionary:
     if !camera : return {}

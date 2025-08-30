@@ -20,3 +20,10 @@ func UseItem() -> Item:
     print("Items left : " + str(inventory[key]))
     
     return key
+
+func AddItem(item : Item) -> void:
+    if not keys.has(item) : keys.append(item)
+    
+    if not inventory.has(item): inventory[item] = 0
+    inventory[item] += 1
+    

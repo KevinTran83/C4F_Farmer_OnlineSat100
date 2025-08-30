@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://btrhiyum38m4t"]
+
+[ext_resource type="Script" path="res://C4F_Farmer/Scripts/Item.gd" id="1_fhgn2"]
+
+[resource]
+script = ExtResource("1_fhgn2")
+itemName = "Carrot"
