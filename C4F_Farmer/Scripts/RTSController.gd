@@ -7,6 +7,8 @@ var agent : NavigationAgent3D
 @onready var player   : CharacterBody3D = get_parent()
 @onready var inventory : Inventory = get_parent().get_node("Inventory")
 
+signal onNumberKeyPressed(no : int)
+
 func _ready() -> void:
     agent = NavigationAgent3D.new()
     get_parent().add_child.call_deferred(agent)
@@ -17,7 +19,7 @@ func _process(_dt : float) -> void:
             var dir     : Vector3 = (nextPos - player.get_global_position()).normalized()
             movement.Move(dir)
     
-func _input(event : InputEvent) -> void:
+func _unhandled_input(event : InputEvent) -> void:
     if (event is InputEventMouseButton and event.is_pressed()):
         if(event.get_button_index() == MOUSE_BUTTON_RIGHT):
             var query : Dictionary = mouseRaycast()
@@ -30,6 +32,10 @@ func _input(event : InputEvent) -> void:
                 if   plant.is_in_group("Plant") : farm.Harvest(plant)
                 elif plant.is_in_group("Seed")  : inventory.AddItem(plant.GetItem())
                 else                            : farm.Plant(query.position)
+    
+    if (event is InputEventKey and event.is_pressed()):
+        inventory.SelectItem(event.keycode - KEY_0 - 1) # @todo Delete
+        onNumberKeyPressed.emit(event.keycode - KEY_0 - 1)
 
 func mouseRaycast() -> Dictionary:
     if !camera : return {}

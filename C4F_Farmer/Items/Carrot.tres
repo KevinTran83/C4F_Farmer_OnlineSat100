@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://btrhiyum38m4t"]
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://btrhiyum38m4t"]
 
 [ext_resource type="Script" path="res://C4F_Farmer/Scripts/Item.gd" id="1_fhgn2"]
+[ext_resource type="Texture2D" uid="uid://dukf56a2ut00r" path="res://C4F_Farmer/Sprites/carrot-100x100.png" id="1_hdxd5"]
 
 [resource]
 script = ExtResource("1_fhgn2")
 itemName = "Carrot"
+icon = ExtResource("1_hdxd5")
