@@ -12,5 +12,6 @@ func Plant(spawnPos : Vector3) -> void:
     newPlant.set_global_position(spawnPos)
 
 func Harvest(targetPlant : Plant) -> void:
+    if not targetPlant.IsRipe() : return
     targetPlant.Drop()
     targetPlant.queue_free()

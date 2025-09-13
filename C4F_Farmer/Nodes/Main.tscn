@@ -135,5 +135,6 @@ grow_horizontal = 2
 grow_vertical = 0
 max_columns = 0
 
+[connection signal="onNumberKeyPressed" from="Level/Player/RTSController" to="Level/Player/Inventory" method="SelectItem"]
 [connection signal="onItemAdd" from="Level/Player/Inventory" to="InventoryHUD" method="UpdateItem"]
 [connection signal="onItemUse" from="Level/Player/Inventory" to="InventoryHUD" method="UpdateItem"]

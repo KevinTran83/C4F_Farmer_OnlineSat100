@@ -9,7 +9,12 @@ var selectedIndex : int
 signal onItemAdd(itemNo : int, item : Item, noItems : int)
 signal onItemUse(itemNo : int, item : Item, noItems : int)
 
-func _ready() -> void : selectedIndex = 0
+func _ready() -> void:
+    selectedIndex = 0
+    get_tree().get_root().get_node("Main")         \
+                         .get_node("InventoryHUD") \
+                         .get_node("ItemList")     \
+                         .item_selected.connect(SelectItem)
 
 func UseItem() -> Item:
     if selectedIndex < 0 :                 return null

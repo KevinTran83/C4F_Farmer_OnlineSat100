@@ -12,6 +12,11 @@ signal onNumberKeyPressed(no : int)
 func _ready() -> void:
     agent = NavigationAgent3D.new()
     get_parent().add_child.call_deferred(agent)
+    onNumberKeyPressed.connect( get_tree().get_root().get_node("Main") \
+                                          .get_node("InventoryHUD")    \
+                                          .get_node("ItemList")
+                                          .select
+                              )
 
 func _process(_dt : float) -> void:
     if !agent.is_target_reached() :
@@ -34,8 +39,8 @@ func _unhandled_input(event : InputEvent) -> void:
                 else                            : farm.Plant(query.position)
     
     if (event is InputEventKey and event.is_pressed()):
-        inventory.SelectItem(event.keycode - KEY_0 - 1) # @todo Delete
-        onNumberKeyPressed.emit(event.keycode - KEY_0 - 1)
+        if event.keycode >= KEY_0 and event.keycode <= KEY_9:
+            onNumberKeyPressed.emit(event.keycode - KEY_0 - 1)
 
 func mouseRaycast() -> Dictionary:
     if !camera : return {}

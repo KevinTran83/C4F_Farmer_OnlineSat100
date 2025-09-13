@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://beit2p21twxol"]
+
+[ext_resource type="Texture2D" uid="uid://tlarrievqbjx" path="res://C4F_Farmer/Sprites/Sapling.png" id="1_l2vjj"]
+
+[node name="Sapling" type="Sprite3D"]
+texture = ExtResource("1_l2vjj")
+hframes = 3
