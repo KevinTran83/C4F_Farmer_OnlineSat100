@@ -10,8 +10,9 @@ var agent : NavigationAgent3D
 signal onNumberKeyPressed(no : int)
 
 func _ready() -> void:
-    agent = NavigationAgent3D.new()
-    get_parent().add_child.call_deferred(agent)
+    agent = get_parent().get_node("NavigationAgent3D")
+    agent.set_target_desired_distance(0.001)
+    #get_parent().add_child.call_deferred(agent)
     onNumberKeyPressed.connect( get_tree().get_root().get_node("Main") \
                                           .get_node("InventoryHUD")    \
                                           .get_node("ItemList")
@@ -22,6 +23,9 @@ func _process(_dt : float) -> void:
     if !agent.is_target_reached() :
             var nextPos : Vector3 = agent.get_next_path_position()
             var dir     : Vector3 = (nextPos - player.get_global_position()).normalized()
+            print("Player " + str(player.get_global_position()))
+            print("Next   " + str(agent.get_next_path_position()))
+            print(dir)
             movement.Move(dir)
     
 func _unhandled_input(event : InputEvent) -> void:
@@ -29,6 +33,7 @@ func _unhandled_input(event : InputEvent) -> void:
         if(event.get_button_index() == MOUSE_BUTTON_RIGHT):
             var query : Dictionary = mouseRaycast()
             if (!query.is_empty()):
+                print("Hit    " + str(query.position))
                 agent.set_target_position(query.position)
         if(event.get_button_index() == MOUSE_BUTTON_LEFT):
             var query : Dictionary = mouseRaycast()

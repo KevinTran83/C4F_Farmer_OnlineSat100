@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://giniphuhuaml"]
+[gd_scene load_steps=13 format=3 uid="uid://giniphuhuaml"]
 
 [ext_resource type="Material" uid="uid://bdd8bmw8uo0yp" path="res://C4F_Farmer/Materials/Brown.tres" id="1_tix72"]
 [ext_resource type="Script" path="res://C4F_Farmer/Scripts/Plant.gd" id="1_u5o3r"]
 [ext_resource type="PackedScene" uid="uid://r4kqviyjnc2k" path="res://C4F_Farmer/Nodes/PotatoSeed.tscn" id="2_b3afh"]
+[ext_resource type="PackedScene" uid="uid://beit2p21twxol" path="res://C4F_Farmer/Nodes/Sapling.tscn" id="4_d1epg"]
+[ext_resource type="Texture2D" uid="uid://bamd88girf3xi" path="res://C4F_Farmer/Sprites/potatoSeedling-100x100.png" id="5_ms0ea"]
+[ext_resource type="Script" path="res://C4F_Farmer/Scripts/AnimateGrow.gd" id="6_cb0l2"]
+[ext_resource type="Script" path="res://C4F_Farmer/Scripts/PlantFrames.gd" id="7_eeg1a"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_60pfo"]
 radius = 0.05
@@ -10,6 +14,21 @@ height = 0.05
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_52n5l"]
 radius = 0.05
+
+[sub_resource type="Resource" id="Resource_4ucwk"]
+script = ExtResource("7_eeg1a")
+sprite = NodePath("../MeshInstance3D")
+framesTotal = 1
+
+[sub_resource type="Resource" id="Resource_yvkg6"]
+script = ExtResource("7_eeg1a")
+sprite = NodePath("../Sapling")
+framesTotal = 3
+
+[sub_resource type="Resource" id="Resource_ud713"]
+script = ExtResource("7_eeg1a")
+sprite = NodePath("../Seedling")
+framesTotal = 1
 
 [node name="PotatoPlant" type="Node3D" groups=["Plant"]]
 script = ExtResource("1_u5o3r")
@@ -20,7 +39,20 @@ ripeTime = 3.0
 material_override = ExtResource("1_tix72")
 mesh = SubResource("SphereMesh_60pfo")
 
+[node name="Sapling" parent="." instance=ExtResource("4_d1epg")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.109266, 0)
+
 [node name="Area3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_52n5l")
+
+[node name="Seedling" type="Sprite3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0713407, 0)
+texture = ExtResource("5_ms0ea")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("6_cb0l2")
+plantStages = Array[ExtResource("7_eeg1a")]([SubResource("Resource_4ucwk"), SubResource("Resource_yvkg6"), SubResource("Resource_ud713")])
+
+[connection signal="onGrow" from="." to="Node" method="Animate"]

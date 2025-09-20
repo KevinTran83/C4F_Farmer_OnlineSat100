@@ -8,9 +8,13 @@ extends Node3D
 
 var lifetime : float
 
+signal onGrow(t : float)
+
 func _ready() -> void : lifetime = 0
 
-func _process(delta : float) -> void : lifetime += delta
+func _process(delta : float) -> void :
+    lifetime += delta
+    onGrow.emit(lifetime / ripeTime)
 
 func IsRipe() -> bool : return lifetime >= ripeTime
 

@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://fj2qmrrx5dtq"]
+[gd_scene load_steps=13 format=3 uid="uid://fj2qmrrx5dtq"]
 
 [ext_resource type="Script" path="res://C4F_Farmer/Scripts/Plant.gd" id="1_7q0vp"]
 [ext_resource type="Material" uid="uid://bdd8bmw8uo0yp" path="res://C4F_Farmer/Materials/Brown.tres" id="1_uj6tm"]
 [ext_resource type="PackedScene" uid="uid://be5h4wmjnvqvy" path="res://C4F_Farmer/Nodes/CarrotSeed.tscn" id="2_2vsrf"]
+[ext_resource type="PackedScene" uid="uid://beit2p21twxol" path="res://C4F_Farmer/Nodes/Sapling.tscn" id="4_h1xve"]
+[ext_resource type="Texture2D" uid="uid://tthkr0omgkx4" path="res://C4F_Farmer/Sprites/carrotSeedling-100x100.png" id="5_f3vfy"]
+[ext_resource type="Script" path="res://C4F_Farmer/Scripts/AnimateGrow.gd" id="6_u7c3a"]
+[ext_resource type="Script" path="res://C4F_Farmer/Scripts/PlantFrames.gd" id="7_ku7qy"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1rqgb"]
 radius = 0.05
@@ -10,6 +14,21 @@ height = 0.05
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_km4v7"]
 radius = 0.1
+
+[sub_resource type="Resource" id="Resource_x83fv"]
+script = ExtResource("7_ku7qy")
+sprite = NodePath("../MeshInstance3D2")
+framesTotal = 1
+
+[sub_resource type="Resource" id="Resource_f763x"]
+script = ExtResource("7_ku7qy")
+sprite = NodePath("../Sapling")
+framesTotal = 3
+
+[sub_resource type="Resource" id="Resource_3dae5"]
+script = ExtResource("7_ku7qy")
+sprite = NodePath("../Seedling")
+framesTotal = 1
 
 [node name="CarrotPlant" type="Node3D" groups=["Plant"]]
 script = ExtResource("1_7q0vp")
@@ -24,3 +43,16 @@ mesh = SubResource("SphereMesh_1rqgb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("SphereShape3D_km4v7")
+
+[node name="Sapling" parent="." instance=ExtResource("4_h1xve")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.109266, 0)
+
+[node name="Seedling" type="Sprite3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0713407, 0)
+texture = ExtResource("5_f3vfy")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("6_u7c3a")
+plantStages = Array[ExtResource("7_ku7qy")]([SubResource("Resource_x83fv"), SubResource("Resource_f763x"), SubResource("Resource_3dae5")])
+
+[connection signal="onGrow" from="." to="Node" method="Animate"]
